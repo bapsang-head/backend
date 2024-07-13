@@ -13,7 +13,7 @@ spring:
         default_batch_fetch_size: 100
 
 springdoc:
-  packages-to-scan: com.uket
+  packages-to-scan: com.fancychild
   default-consumes-media-type: application/json;charset=UTF-8
   default-produces-media-type: application/json;charset=UTF-8
   swagger-ui:
@@ -55,7 +55,6 @@ app:
   token:
     secret-key: testestsetsetsetsetsetsetsetsetestset
     expiration:
-      ticket-expiration: 300_000
       access-token-expiration: 600_000
       refresh-token-expiration: 7_200_000
 ---
@@ -86,7 +85,6 @@ app:
   token:
     secret-key: ${JWT_SECRET_KEY}
     expiration:
-      ticket-expiration: 300_000
       access-token-expiration: 600_000
       refresh-token-expiration: 7_200_000
 
