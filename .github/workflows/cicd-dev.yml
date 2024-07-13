@@ -3,7 +3,7 @@ name: Java CI/CD with Gradle
 on:
   push:
     branches:
-      - dev
+      - main
 
 env:
   DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
