@@ -53,6 +53,9 @@ class SecurityConfig(
                         configuration
                     }
                 }
+                .csrf {
+                    it.disable()
+                }
 
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)
                 .exceptionHandling { exceptionHandlerManagement ->

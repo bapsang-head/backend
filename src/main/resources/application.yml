@@ -21,7 +21,11 @@ springdoc:
     display-request-duration: true
     operations-sorter: alpha
     tags-sorter: alpha
-
+app:
+  kakao:
+    user-info-uri: https://kapi.kakao.com/v2/user/me
+    client-id: ${KAKAO_CLIENT_ID}
+    client-secret: ${KAKAO_CLIENT_SECRET}
 ---
 
 spring:
