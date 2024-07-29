@@ -24,3 +24,14 @@ spring:
     password:
     hikari:
       maximum-pool-size: 40
+app:
+  kakao:
+    user-info-uri: https://kapi.kakao.com/v2/user/me
+    client-id: dsadsad
+    client-secret: fdsfdsfdsfsdf
+  token:
+    secret-key: testestsetsetsetsetsetsetsetsetestset
+    expiration:
+      ticket-expiration: 1_200_000
+      access-token-expiration: 1_200_000
+      refresh-token-expiration: 7_200_000
