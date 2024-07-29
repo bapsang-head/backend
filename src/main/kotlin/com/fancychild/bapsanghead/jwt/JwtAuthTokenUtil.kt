@@ -18,8 +18,9 @@ class JwtAuthTokenUtil(
     }
 
     fun getId(token: String?): Long {
-        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token)
-                .payload[JwtValues.JWT_PAYLOAD_KEY_ID] as Long
+        val id = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token)
+                .payload[JwtValues.JWT_PAYLOAD_KEY_ID] as Int
+        return id.toLong()
     }
 
     fun getName(token: String?): String {

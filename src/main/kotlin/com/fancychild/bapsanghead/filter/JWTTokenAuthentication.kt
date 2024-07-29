@@ -11,14 +11,14 @@ class JWTTokenAuthentication(
 
 
     override fun getAuthorities(): Collection<GrantedAuthority> {
-        val collection: MutableCollection<GrantedAuthority> = ArrayList<GrantedAuthority>()
-        collection.add(userDto::role as GrantedAuthority)
+        val collection = mutableListOf<GrantedAuthority>()
+        collection.add(GrantedAuthority(userDto::role))
 
         return collection
     }
 
     override fun getName(): String {
-        return java.lang.String.valueOf(userDto.userId)
+        return userDto.userId.toString()
     }
 
     override fun getCredentials(): Any {
