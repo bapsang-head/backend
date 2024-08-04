@@ -5,6 +5,7 @@ import com.fancychild.bapsanghead.domain.auth.service.AuthService
 import com.fancychild.bapsanghead.domain.user.dto.UserDetailsDto
 import com.fancychild.bapsanghead.domain.user.entity.Users
 import com.fancychild.bapsanghead.domain.user.enums.ActivityLevel
+import com.fancychild.bapsanghead.domain.user.enums.Gender
 import com.fancychild.bapsanghead.domain.user.enums.Platform
 import com.fancychild.bapsanghead.domain.user.service.UserService
 import com.fancychild.bapsanghead.dto.request.LoginRequest
@@ -65,6 +66,7 @@ class AuthController(
                 height = request.height,
                 weight = request.weight,
                 age = request.age,
+                gender = Gender.valueOf(request.gender),
                 activityLevel = ActivityLevel.valueOf(request.activityLevel)
         )
 

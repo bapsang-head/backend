@@ -26,7 +26,8 @@ data class Users(
 
         private val platformId: String,
 
-        @Enumerated(EnumType.STRING) val role: UserRole,
+        @Enumerated(EnumType.STRING)
+        val role: UserRole,
 
         var isRegistered: Boolean = false,
 ) : BaseEntity() {

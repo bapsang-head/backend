@@ -65,7 +65,8 @@ class WebExceptionHandler {
         ServletRequestBindingException::class,
         MethodArgumentNotValidException::class,
         ConstraintViolationException::class,
-        MethodArgumentTypeMismatchException::class
+        MethodArgumentTypeMismatchException::class,
+        IllegalArgumentException::class
     ])
     fun handleValidateException(request: HttpServletRequest?,
                                 exception: Exception?): ResponseEntity<ErrorResponse> {

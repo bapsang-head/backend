@@ -2,6 +2,7 @@ package com.fancychild.bapsanghead.domain.user.service
 
 import com.fancychild.bapsanghead.domain.user.dto.CreateUserDto
 import com.fancychild.bapsanghead.domain.user.dto.UserDetailsDto
+import com.fancychild.bapsanghead.domain.user.entity.UserDetails
 import com.fancychild.bapsanghead.domain.user.entity.Users
 import com.fancychild.bapsanghead.domain.user.repository.UserDetailsRepository
 import com.fancychild.bapsanghead.domain.user.repository.UserRepository
@@ -53,6 +54,16 @@ class UserService(
         userRepository.save(user)
 
         return authTokenGenerator.generateAuthToken(user)
+    }
+
+    fun updateProfile(userId: Long, userDetailsDto: UserDetailsDto): UserDetails {
+        val user = findById(userId)
+        val userDetails = user.userDetails
+
+        return userDetails?.run {
+            this.update(userDetailsDto)
+            userDetailsRepository.save(this)
+        }?: throw BaseException(ErrorCode.NOT_FOUND_USER_DETAILS)
     }
 
     private fun updateProfileOfExistUser(createUserDto: CreateUserDto, existUser: Users): Users {
