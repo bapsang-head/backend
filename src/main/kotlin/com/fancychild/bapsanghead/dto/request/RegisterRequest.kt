@@ -12,7 +12,7 @@ data class RegisterRequest(
         @Schema(description = "나이", example = "25")
         val age: Int,
 
-        @Schema(description = "성별", example = "MAIE or FEMALE")
+        @Schema(description = "성별", example = "MALE or FEMALE")
         val gender: String,
 
         @Schema(
