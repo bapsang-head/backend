@@ -35,4 +35,9 @@ data class Users(
         this.name = name
         this.profileImage = profileImage
     }
+
+    fun register(userDetails: UserDetails) {
+        this.userDetails = userDetails
+        this.isRegistered = true
+    }
 }

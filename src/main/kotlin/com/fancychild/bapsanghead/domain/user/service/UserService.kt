@@ -1,15 +1,21 @@
 package com.fancychild.bapsanghead.domain.user.service
 
 import com.fancychild.bapsanghead.domain.user.dto.CreateUserDto
+import com.fancychild.bapsanghead.domain.user.dto.UserDetailsDto
 import com.fancychild.bapsanghead.domain.user.entity.Users
+import com.fancychild.bapsanghead.domain.user.repository.UserDetailsRepository
 import com.fancychild.bapsanghead.domain.user.repository.UserRepository
+import com.fancychild.bapsanghead.dto.response.AuthToken
 import com.fancychild.bapsanghead.exception.BaseException
 import com.fancychild.bapsanghead.exception.ErrorCode
+import com.fancychild.bapsanghead.util.AuthTokenGenerator
 import org.springframework.stereotype.Service
 
 @Service
 class UserService(
-        private val userRepository: UserRepository
+        private val userRepository: UserRepository,
+        private val userDetailsRepository: UserDetailsRepository,
+        private val authTokenGenerator: AuthTokenGenerator
 ) {
 
     fun saveUser(dto: CreateUserDto): Users {
@@ -34,6 +40,19 @@ class UserService(
 
     fun findById(id: Long): Users {
         return userRepository.findById(id).orElseThrow { throw BaseException(ErrorCode.NOT_FOUND_USER) }
+    }
+
+    fun register(userId: Long, userDetailsDto: UserDetailsDto): AuthToken {
+        val user = findById(userId)
+        if (user.isRegistered) {
+            throw BaseException(ErrorCode.ALREADY_REGISTERED_USER)
+        }
+        val userDetails = userDetailsRepository.save(userDetailsDto.toEntity())
+
+        user.register(userDetails)
+        userRepository.save(user)
+
+        return authTokenGenerator.generateAuthToken(user)
     }
 
     private fun updateProfileOfExistUser(createUserDto: CreateUserDto, existUser: Users): Users {

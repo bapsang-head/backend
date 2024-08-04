@@ -1,21 +1,20 @@
 package com.fancychild.bapsanghead.domain.user.entity
 
 import com.fancychild.bapsanghead.domain.BaseEntity
+import com.fancychild.bapsanghead.domain.user.enums.ActivityLevel
 import jakarta.persistence.*
 
 @Entity
 data class UserDetails(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private var id: Long,
+        private val id: Long = 0,
 
-        private var depositorName: String,
+        private val height: Int,
 
-        private var phoneNumber: String,
+        private val weight: Int,
 
-        private val studentMajor: String,
+        private val age: Int,
 
-        private val studentCode: String,
-
-        private val universityEmail: String,
+        private val activityLevel: ActivityLevel
 ) : BaseEntity()
