@@ -2,12 +2,13 @@ package com.fancychild.bapsanghead.dto.response
 
 import com.fancychild.bapsanghead.exception.ErrorCode
 
-@JvmRecord
-data class ErrorResponse(val code: String,
+data class ErrorResponse(
+        val code: String,
 
-                         val message: String
+        val message: String
 ) {
-    companion object {
+
+    companion object{
         fun of(code: String, message: String): ErrorResponse {
             return ErrorResponse(code, message)
         }

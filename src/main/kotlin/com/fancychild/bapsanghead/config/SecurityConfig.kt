@@ -78,7 +78,7 @@ class SecurityConfig(
                 .authorizeHttpRequests { registry ->
                     registry
                             .requestMatchers("/api/v1/auth").permitAll()
-                            .requestMatchers("/api/v1/auth/**").permitAll()
+                            .requestMatchers("/api/v1/auth/login/**").permitAll()
                 }
                 .authorizeHttpRequests { registry ->
                     registry

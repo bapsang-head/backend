@@ -26,7 +26,8 @@ data class Users(
 
         private val platformId: String,
 
-        @Enumerated(EnumType.STRING) val role: UserRole,
+        @Enumerated(EnumType.STRING)
+        val role: UserRole,
 
         var isRegistered: Boolean = false,
 ) : BaseEntity() {
@@ -34,5 +35,10 @@ data class Users(
         this.email = email
         this.name = name
         this.profileImage = profileImage
+    }
+
+    fun register(userDetails: UserDetails) {
+        this.userDetails = userDetails
+        this.isRegistered = true
     }
 }
