@@ -7,6 +7,7 @@ import com.fancychild.bapsanghead.domain.user.enums.Gender
 import com.fancychild.bapsanghead.domain.user.service.UserService
 import com.fancychild.bapsanghead.dto.request.UpdateUserDetailsRequest
 import com.fancychild.bapsanghead.dto.response.UpdateUserDetailsResponse
+import com.fancychild.bapsanghead.dto.response.UserResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -44,6 +45,26 @@ class UserController(
         }
 
         val response = UpdateUserDetailsResponse.of(updatedUserDetails.toDto())
+        return ResponseEntity.ok(response)
+    }
+
+    @Operation(summary = "유저 정보 조회", description = "유저 정보를 반환합니다.")
+    @GetMapping("/profile")
+    fun findUser(
+            @LoginUserId
+            @Parameter(hidden = true)
+            userId: Long
+    ): ResponseEntity<UserResponse> {
+        val findUser = userService.findById(userId)
+
+        val userDetails = findUser.userDetails?.toDto()
+        val response = UserResponse(
+                name = findUser.name,
+                email = findUser.email,
+                age = userDetails?.age.toString(),
+                gender = userDetails?.gender.toString(),
+                activityLevel = userDetails?.activityLevel.toString()
+        )
         return ResponseEntity.ok(response)
     }
 }
