@@ -1,5 +1,6 @@
 package com.fancychild.bapsanghead.controller
 
+import com.fancychild.bapsanghead.client.AiClient
 import com.fancychild.bapsanghead.config.userid.LoginUserId
 import com.fancychild.bapsanghead.domain.user.dto.CreateUserDto
 import com.fancychild.bapsanghead.domain.user.dto.UserDetailsDto
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/v1/dev")
 class DevController(
         private val userService: UserService,
+        private val aiClient: AiClient,
         private val jwtAuthTokenUtil: JwtAuthTokenUtil
 ) {
 
@@ -75,6 +77,12 @@ class DevController(
     ): ResponseEntity<UserDto> {
         val findUser: Users = userService.findById(userId)
         return ResponseEntity.ok(generateUserDto(findUser))
+    }
+
+    @GetMapping("/ai/diet")
+    fun getDiet(): ResponseEntity<String> {
+        aiClient.getDiet()
+        return ResponseEntity.ok("diet")
     }
 
     private fun generateUserDto(user: Users): UserDto {
