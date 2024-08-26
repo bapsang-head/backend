@@ -61,7 +61,9 @@ class UserController(
         val response = UserResponse(
                 name = findUser.name,
                 email = findUser.email,
-                age = userDetails?.age.toString(),
+                age = userDetails?.age ?: 0,
+                weight = userDetails?.weight ?: 0,
+                height = userDetails?.height ?: 0,
                 gender = userDetails?.gender.toString(),
                 activityLevel = userDetails?.activityLevel.toString()
         )

@@ -44,7 +44,8 @@ class DevController(
                 userDto.userId,
                 userDto.name,
                 userDto.role,
-                isRegistered)
+                isRegistered
+        )
         val newRefreshToken = jwtAuthTokenUtil.createRefreshToken()
 
         val authToken: AuthToken = AuthToken.of(newAccessToken, newRefreshToken, isRegistered)
@@ -55,6 +56,23 @@ class DevController(
     @Operation(summary = "회원가입된 토큰 강제 발행", description = "회원가입된 토큰을 발급합니다.")
     fun getRegisteredToken(): ResponseEntity<TokenResponse>{
         val user = userService.saveUser(generateCreateUserDto())
+
+        if (user.isRegistered) {
+            val userDto = generateUserDto(user)
+            val isRegistered: Boolean = userDto.isRegistered
+
+            val newAccessToken = jwtAuthTokenUtil.createAccessToken(
+                    userDto.userId,
+                    userDto.name,
+                    userDto.role,
+                    isRegistered
+            )
+            val newRefreshToken = jwtAuthTokenUtil.createRefreshToken()
+
+            val authToken: AuthToken = AuthToken.of(newAccessToken, newRefreshToken, isRegistered)
+            return ResponseEntity.ok(TokenResponse.from(authToken))
+        }
+
         val userDetailsDto = UserDetailsDto(
                 height = 180,
                 weight = 80,
