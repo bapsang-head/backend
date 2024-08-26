@@ -1,10 +1,12 @@
 package com.fancychild.bapsanghead.controller
 
 import com.fancychild.bapsanghead.config.userid.LoginUserId
-import com.fancychild.bapsanghead.domain.user.dto.CreateUserDetailsDto
 import com.fancychild.bapsanghead.domain.user.dto.CreateUserDto
+import com.fancychild.bapsanghead.domain.user.dto.UserDetailsDto
 import com.fancychild.bapsanghead.domain.user.dto.UserDto
 import com.fancychild.bapsanghead.domain.user.entity.Users
+import com.fancychild.bapsanghead.domain.user.enums.ActivityLevel
+import com.fancychild.bapsanghead.domain.user.enums.Gender
 import com.fancychild.bapsanghead.domain.user.enums.Platform
 import com.fancychild.bapsanghead.domain.user.enums.UserRole
 import com.fancychild.bapsanghead.domain.user.service.UserService
@@ -47,6 +49,22 @@ class DevController(
         return ResponseEntity.ok(TokenResponse.from(authToken))
     }
 
+    @GetMapping("/token/registered")
+    @Operation(summary = "회원가입된 토큰 강제 발행", description = "회원가입된 토큰을 발급합니다.")
+    fun getRegisteredToken(): ResponseEntity<TokenResponse>{
+        val user = userService.saveUser(generateCreateUserDto())
+        val userDetailsDto = UserDetailsDto(
+                height = 180,
+                weight = 80,
+                age = 20,
+                gender = Gender.valueOf("MALE"),
+                activityLevel = ActivityLevel.valueOf("LOW")
+        )
+
+        val authToken = userService.register(user.id, userDetailsDto)
+        return ResponseEntity.ok(TokenResponse.from(authToken))
+    }
+
     @GetMapping("/user")
     @Operation(summary = "유저 정보 조회", description = "유저 정보를 조회합니다.")
     @SecurityRequirement(name = "JWT")
@@ -76,16 +94,6 @@ class DevController(
                 platformId = "1234",
                 role = UserRole.ROLE_USER,
                 profileImage = ""
-        )
-    }
-
-    private fun generateCreateUserDetailsDto(): CreateUserDetailsDto {
-        return CreateUserDetailsDto(
-                depositorName = "홍길동",
-                universityEmail = "abc@konkuk.ac.kr",
-                phoneNumber = "01012341234",
-                studentMajor = "컴퓨터공학부",
-                studentCode = "202411032"
         )
     }
 }

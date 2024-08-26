@@ -83,6 +83,7 @@ class SecurityConfig(
                 .authorizeHttpRequests { registry ->
                     registry
                             .requestMatchers("/api/v1/dev/token").permitAll()
+                            .requestMatchers("/api/v1/dev/token/registered").permitAll()
                 }
                 .authorizeHttpRequests { registry ->
                     registry
