@@ -81,7 +81,7 @@ class FoodController(
                     unit = it.unit,
                     count = it.count,
                     date = LocalDate.now(),
-                    mealType = MealType.BREAKFAST
+                    mealType = request.mealType
             )
         }
     }
