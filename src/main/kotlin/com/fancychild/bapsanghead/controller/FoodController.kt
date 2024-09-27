@@ -2,6 +2,7 @@ package com.fancychild.bapsanghead.controller
 
 import com.fancychild.bapsanghead.client.*
 import com.fancychild.bapsanghead.config.userid.LoginUserId
+import com.fancychild.bapsanghead.domain.food.entity.FoodRecord
 import com.fancychild.bapsanghead.domain.food.entity.MealType
 import com.fancychild.bapsanghead.domain.food.service.FoodRecordService
 import com.fancychild.bapsanghead.domain.food.service.FoodService
@@ -44,8 +45,8 @@ class FoodController(
             @DateTimeFormat(pattern = "yyyy-MM-dd") date: LocalDate,
 
             @PathVariable("mealType") mealType: MealType
-    ) {
-        foodRecordService.getFoodRecords(userId, date, mealType)
+    ): List<FoodRecord> {
+        return foodRecordService.getFoodRecords(userId, date, mealType)
     }
 
     @Operation(summary = "음식 정보 조회 API", description = "사용자가 입력한 식단의 영양정보를 가져옵니다.")
