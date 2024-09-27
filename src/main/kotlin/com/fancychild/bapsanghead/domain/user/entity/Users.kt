@@ -6,7 +6,7 @@ import com.fancychild.bapsanghead.domain.user.enums.UserRole
 import jakarta.persistence.*
 
 @Entity
-data class Users(
+class Users(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long = 0,

@@ -1,7 +1,6 @@
 package com.fancychild.bapsanghead.client
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -15,6 +14,12 @@ interface AiClient {
             @RequestBody request: ResultRequest,
             @RequestHeader("Activate-Key") key: String
     ): ResultResponse
+
+    @PostMapping("/second_GPT_API/")
+    fun getInformationOfFood(
+            @RequestBody request: FoodInformationRequest,
+            @RequestHeader("Activate-Key") key: String
+    ): FoodInformationResponse
 
     @PostMapping("/diet")
     fun getDiet(): String
@@ -34,16 +39,17 @@ data class ResultResponse(
     )
 }
 
-data class DietRequest(
-        val data: List<FoodRequest>,
-){
-    data class FoodRequest(
-            val index: String,
-            val word: Int,
-            val tag: Int,
-    )
-}
+data class FoodInformationRequest(
+        val food: String,
+        val unit: String,
+)
 
-data class DietResponse(
-        val diet: String,
+data class FoodInformationResponse(
+        val food: String,
+        val unit: String,
+        val gram: Double,
+        val calories: Double,
+        val carbohydrates: Double,
+        val protein: Double,
+        val fat: Double,
 )

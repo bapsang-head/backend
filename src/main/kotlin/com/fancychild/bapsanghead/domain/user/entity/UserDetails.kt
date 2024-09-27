@@ -7,7 +7,7 @@ import com.fancychild.bapsanghead.domain.user.enums.Gender
 import jakarta.persistence.*
 
 @Entity
-data class UserDetails(
+class UserDetails(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private val id: Long = 0,
