@@ -34,7 +34,7 @@ data class ResultResponse(
 ){
     data class FoodResponse(
             val food: String,
-            val quantity: String,
+            val quantity: Int,
             val unit: String,
     )
 }

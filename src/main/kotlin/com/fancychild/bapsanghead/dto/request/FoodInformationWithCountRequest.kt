@@ -9,6 +9,6 @@ data class FoodInformationWithCountRequest(
     data class FoodRequest(
             val food: String,
             val unit: String,
-            val count: Int,
+            val quantity: Int,
     )
 }
