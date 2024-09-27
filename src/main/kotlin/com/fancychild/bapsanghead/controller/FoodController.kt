@@ -6,7 +6,7 @@ import com.fancychild.bapsanghead.domain.food.entity.MealType
 import com.fancychild.bapsanghead.domain.food.service.FoodRecordService
 import com.fancychild.bapsanghead.domain.food.service.FoodService
 import com.fancychild.bapsanghead.dto.request.FoodInformationWithCountRequest
-import com.fancychild.bapsanghead.dto.response.FoodInformationWithCountResponse
+import com.fancychild.bapsanghead.dto.response.FoodInformationResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -40,6 +40,7 @@ class FoodController(
             @LoginUserId userId: Long,
 
             @PathVariable("date")
+            @Parameter(example = "2024-09-27")
             @DateTimeFormat(pattern = "yyyy-MM-dd") date: LocalDate,
 
             @PathVariable("mealType") mealType: MealType
@@ -50,22 +51,20 @@ class FoodController(
     @Operation(summary = "음식 정보 조회 API", description = "사용자가 입력한 식단의 영양정보를 가져옵니다.")
     @GetMapping("/information")
     fun getInformationOfFoodRecord(
-            @RequestBody request: FoodInformationWithCountRequest
-    ): List<FoodInformationWithCountResponse> {
-        return request.data.map {
-            val food = foodService.findByNameAndUnit(it.food, it.unit) ?: throw IllegalArgumentException("음식 정보가 없습니다.")
+            @RequestParam food: String,
+            @RequestParam unit: String,
+    ): FoodInformationResponse {
+        val findFood = foodService.findByNameAndUnit(food, unit) ?: throw IllegalArgumentException("음식 정보가 없습니다.")
 
-            FoodInformationWithCountResponse(
-                    count = it.count,
-                    name = food.name,
-                    unit = food.unit,
-                    calories = food.calorie,
-                    carbohydrates = food.carbohydrate,
-                    protein = food.protein,
-                    fat = food.fat,
-                    gram = food.gram
-            )
-        }
+        return FoodInformationResponse(
+                name = findFood.name,
+                unit = findFood.unit,
+                calories = findFood.calorie,
+                carbohydrates = findFood.carbohydrate,
+                protein = findFood.protein,
+                fat = findFood.fat,
+                gram = findFood.gram
+        )
     }
 
     @Operation(summary = "음식 정보 업로드 API", description = "음식 정보를 업로드합니다.")

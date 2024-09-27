@@ -2,7 +2,7 @@ package com.fancychild.bapsanghead.dto.response
 
 import com.fancychild.bapsanghead.client.FoodInformationResponse
 
-data class FoodInformationWithCountResponse(
+data class FoodInformationResponse(
         val name: String,
         val unit: String,
         val gram: Double,
@@ -10,14 +10,12 @@ data class FoodInformationWithCountResponse(
         val carbohydrates: Double,
         val protein: Double,
         val fat: Double,
-        val count: Int,
 ){
     companion object {
-        fun of(
+        fun from(
                 foodInformationResponse: FoodInformationResponse,
-                count: Int,
-        ): FoodInformationWithCountResponse {
-            return FoodInformationWithCountResponse(
+        ): com.fancychild.bapsanghead.dto.response.FoodInformationResponse {
+            return FoodInformationResponse(
                     name = foodInformationResponse.food,
                     unit = foodInformationResponse.unit,
                     gram = foodInformationResponse.gram,
@@ -25,7 +23,6 @@ data class FoodInformationWithCountResponse(
                     carbohydrates = foodInformationResponse.carbohydrates,
                     protein = foodInformationResponse.protein,
                     fat = foodInformationResponse.fat,
-                    count = count,
             )
         }
     }
