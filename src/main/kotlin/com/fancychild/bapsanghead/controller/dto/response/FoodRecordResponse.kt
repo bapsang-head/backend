@@ -5,6 +5,7 @@ import com.fancychild.bapsanghead.domain.food.entity.MealType
 import java.time.LocalDate
 
 data class FoodRecordResponse(
+        val foodRecordId: Long,
         val name: String,
         val calorie: Double,
         val carbohydrate: Double,
@@ -19,6 +20,7 @@ data class FoodRecordResponse(
     companion object{
         fun from(foodRecord: FoodRecord): FoodRecordResponse {
             return FoodRecordResponse(
+                    foodRecordId= foodRecord.id,
                     name = foodRecord.food.name,
                     calorie = foodRecord.food.calorie,
                     carbohydrate = foodRecord.food.carbohydrate,
