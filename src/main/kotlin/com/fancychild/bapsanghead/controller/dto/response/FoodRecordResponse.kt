@@ -16,11 +16,11 @@ data class FoodRecordResponse(
         val count: Int,
         val date: LocalDate,
         val mealType: MealType
-){
-    companion object{
+) {
+    companion object {
         fun from(foodRecord: FoodRecord): FoodRecordResponse {
             return FoodRecordResponse(
-                    foodRecordId= foodRecord.id,
+                    foodRecordId = foodRecord.id,
                     name = foodRecord.food.name,
                     calorie = foodRecord.food.calorie,
                     carbohydrate = foodRecord.food.carbohydrate,
