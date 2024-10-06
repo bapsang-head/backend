@@ -54,6 +54,7 @@ class FoodController(
             @PathVariable("mealType") mealType: MealType
     ) = foodRecordService.clearFoodRecords(userId,date,mealType)
 
+    @Operation(summary = "식단 내역 조회 API", description = "사용자가 입력한 식단을 조회합니다.")
     @GetMapping("/records/date/{date}/type/{mealType}")
     fun getFoodRecord(
             @Parameter(hidden = true)
