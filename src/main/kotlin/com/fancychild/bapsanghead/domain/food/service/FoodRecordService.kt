@@ -1,5 +1,6 @@
 package com.fancychild.bapsanghead.domain.food.service
 
+import com.fancychild.bapsanghead.domain.food.dto.FoodRecordMealTypeDto
 import com.fancychild.bapsanghead.domain.food.entity.FoodRecord
 import com.fancychild.bapsanghead.domain.food.entity.MealType
 import com.fancychild.bapsanghead.domain.food.repository.FoodRecordRepository
@@ -33,7 +34,7 @@ class FoodRecordService(
         )
     }
 
-    fun getFoodRecordsByYearMonth(userId: Long, yearMonth: YearMonth): Map<Int, List<FoodRecord>> {
+    fun getFoodRecordsByYearMonth(userId: Long, yearMonth: YearMonth): Map<Int, List<FoodRecordMealTypeDto>> {
         val startDate = LocalDate.of(yearMonth.year, yearMonth.month, 1)
         val endDate = startDate.plusMonths(1).minusDays(1)
 

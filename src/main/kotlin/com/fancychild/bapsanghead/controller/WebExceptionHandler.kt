@@ -73,7 +73,7 @@ class WebExceptionHandler {
         log.warn("[InvalidParameterException]", exception)
         return ResponseEntity
                 .badRequest()
-                .body(of(ErrorCode.INVALID_INPUT_VALUE))
+                .body(of(ErrorCode.INVALID_INPUT_VALUE, exception))
     }
 
     private fun getStackTraceAsString(throwable: Throwable): String {

@@ -8,13 +8,13 @@ data class ErrorResponse(
         val message: String
 ) {
 
-    companion object{
+    companion object {
         fun of(code: String, message: String): ErrorResponse {
             return ErrorResponse(code, message)
         }
 
-        fun of(errorCode: ErrorCode): ErrorResponse {
-            return ErrorResponse(errorCode.code, errorCode.message)
+        fun of(errorCode: ErrorCode, exception: Throwable? = null): ErrorResponse {
+            return ErrorResponse(errorCode.code, exception?.message ?: errorCode.message)
         }
     }
 }

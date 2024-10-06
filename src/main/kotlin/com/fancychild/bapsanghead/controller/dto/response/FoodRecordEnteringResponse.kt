@@ -1,5 +1,6 @@
 package com.fancychild.bapsanghead.controller.dto.response
 
+import com.fancychild.bapsanghead.domain.food.dto.FoodRecordMealTypeDto
 import com.fancychild.bapsanghead.domain.food.entity.FoodRecord
 import com.fancychild.bapsanghead.domain.food.entity.MealType
 import com.fancychild.bapsanghead.domain.food.enums.식단입력여부
@@ -13,7 +14,7 @@ data class FoodRecordEnteringResponse(
     companion object{
         fun toList(
                 yearMonth: YearMonth,
-                foodRecords: Map<Int, List<FoodRecord>>
+                foodRecords: Map<Int, List<FoodRecordMealTypeDto>>
         ): List<FoodRecordEnteringResponse> = (1..yearMonth.month.maxLength()).map { day ->
                 val 식단입력여부 = foodRecords[day]?.let {
                     val hasBreakfast = it.any { record -> record.mealType == MealType.BREAKFAST }

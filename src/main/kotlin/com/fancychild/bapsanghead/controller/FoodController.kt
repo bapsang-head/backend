@@ -11,6 +11,7 @@ import com.fancychild.bapsanghead.controller.dto.response.FoodRecordEnteringResp
 import com.fancychild.bapsanghead.controller.dto.response.FoodRecordResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -93,11 +94,12 @@ class FoodController(
     }
 
     @Operation(summary = "월별 식단 입력 여부 조회 API", description = "월을 기준으로 식단 입력 여부를 조회합니다.")
-    @GetMapping("/records/month/{yearMonth}")
+    @GetMapping("/records/year-month/{yearMonth}")
     fun getFoodRecordByMonth(
             @Parameter(hidden = true)
             @LoginUserId userId: Long,
 
+            @Schema(example = "2024-09")
             @PathVariable("yearMonth") yearMonth: String
     ): List<FoodRecordEnteringResponse> {
 
