@@ -1,6 +1,6 @@
 package com.fancychild.bapsanghead.filter
 
-import com.fancychild.bapsanghead.dto.response.ErrorResponse
+import com.fancychild.bapsanghead.controller.dto.response.ErrorResponse
 import com.fancychild.bapsanghead.exception.ErrorCode
 import com.fasterxml.jackson.databind.ObjectMapper
 import jakarta.servlet.http.HttpServletRequest

@@ -1,6 +1,6 @@
 package com.fancychild.bapsanghead.interceptor
 
-import com.fancychild.bapsanghead.dto.response.ErrorResponse
+import com.fancychild.bapsanghead.controller.dto.response.ErrorResponse
 import com.fancychild.bapsanghead.exception.BaseException
 import com.fancychild.bapsanghead.exception.ErrorCode
 import com.fancychild.bapsanghead.filter.TokenValidator

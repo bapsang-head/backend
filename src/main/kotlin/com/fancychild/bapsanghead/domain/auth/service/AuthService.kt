@@ -7,7 +7,7 @@ import com.fancychild.bapsanghead.domain.user.entity.Users
 import com.fancychild.bapsanghead.domain.user.enums.Platform
 import com.fancychild.bapsanghead.domain.user.enums.UserRole
 import com.fancychild.bapsanghead.domain.user.service.UserService
-import com.fancychild.bapsanghead.dto.response.AuthToken
+import com.fancychild.bapsanghead.controller.dto.response.AuthToken
 import com.fancychild.bapsanghead.util.AuthTokenGenerator
 import org.springframework.stereotype.Service
 

@@ -11,8 +11,8 @@ import com.fancychild.bapsanghead.domain.user.enums.Gender
 import com.fancychild.bapsanghead.domain.user.enums.Platform
 import com.fancychild.bapsanghead.domain.user.enums.UserRole
 import com.fancychild.bapsanghead.domain.user.service.UserService
-import com.fancychild.bapsanghead.dto.response.AuthToken
-import com.fancychild.bapsanghead.dto.response.TokenResponse
+import com.fancychild.bapsanghead.controller.dto.response.AuthToken
+import com.fancychild.bapsanghead.controller.dto.response.TokenResponse
 import com.fancychild.bapsanghead.jwt.JwtAuthTokenUtil
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter

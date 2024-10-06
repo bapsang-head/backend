@@ -2,7 +2,7 @@ package com.fancychild.bapsanghead.util
 
 import com.fancychild.bapsanghead.domain.user.dto.UserDto
 import com.fancychild.bapsanghead.domain.user.entity.Users
-import com.fancychild.bapsanghead.dto.response.AuthToken
+import com.fancychild.bapsanghead.controller.dto.response.AuthToken
 import com.fancychild.bapsanghead.jwt.JwtAuthTokenUtil
 import org.springframework.stereotype.Component
 

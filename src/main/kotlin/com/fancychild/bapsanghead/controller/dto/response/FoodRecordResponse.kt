@@ -1,4 +1,4 @@
-package com.fancychild.bapsanghead.dto.response
+package com.fancychild.bapsanghead.controller.dto.response
 
 import com.fancychild.bapsanghead.domain.food.entity.FoodRecord
 import com.fancychild.bapsanghead.domain.food.entity.MealType

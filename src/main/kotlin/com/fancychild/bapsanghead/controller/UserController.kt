@@ -5,9 +5,9 @@ import com.fancychild.bapsanghead.domain.user.dto.UserDetailsDto
 import com.fancychild.bapsanghead.domain.user.enums.ActivityLevel
 import com.fancychild.bapsanghead.domain.user.enums.Gender
 import com.fancychild.bapsanghead.domain.user.service.UserService
-import com.fancychild.bapsanghead.dto.request.UpdateUserDetailsRequest
-import com.fancychild.bapsanghead.dto.response.UpdateUserDetailsResponse
-import com.fancychild.bapsanghead.dto.response.UserResponse
+import com.fancychild.bapsanghead.controller.dto.request.UpdateUserDetailsRequest
+import com.fancychild.bapsanghead.controller.dto.response.UpdateUserDetailsResponse
+import com.fancychild.bapsanghead.controller.dto.response.UserResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.responses.ApiResponse
