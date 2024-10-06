@@ -41,7 +41,7 @@ class FoodController(
     fun inputFood(@RequestBody request: ResultRequest): ResultResponse = aiClient.inputFood(request, key)
 
     @Operation(summary = "식단 내역 초기화 API", description = "사용자가 입력한 식단을 수정하기 전에 초기화합니다.")
-    @PostMapping("/records/date/{date}/type/{mealType}")
+    @DeleteMapping("/records/date/{date}/type/{mealType}")
     @ResponseStatus(HttpStatus.OK)
     fun clearFoodRecords(
             @Parameter(hidden = true)
