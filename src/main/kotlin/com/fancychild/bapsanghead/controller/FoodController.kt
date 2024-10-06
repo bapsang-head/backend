@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.format.annotation.DateTimeFormat
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
 import java.time.YearMonth
@@ -38,6 +39,20 @@ class FoodController(
     @Operation(summary = "식단 입력 API", description = "사용자가 입력한 식단 문장을 입력합니다.")
     @PostMapping("/input")
     fun inputFood(@RequestBody request: ResultRequest): ResultResponse = aiClient.inputFood(request, key)
+
+    @Operation(summary = "식단 내역 초기화 API", description = "사용자가 입력한 식단을 수정하기 전에 초기화합니다.")
+    @PostMapping("/records/date/{date}/type/{mealType}")
+    @ResponseStatus(HttpStatus.OK)
+    fun clearFoodRecords(
+            @Parameter(hidden = true)
+            @LoginUserId userId: Long,
+
+            @PathVariable("date")
+            @Parameter(example = "2024-09-27")
+            @DateTimeFormat(pattern = "yyyy-MM-dd") date: LocalDate,
+
+            @PathVariable("mealType") mealType: MealType
+    ) = foodRecordService.clearFoodRecords(userId,date,mealType)
 
     @GetMapping("/records/date/{date}/type/{mealType}")
     fun getFoodRecord(

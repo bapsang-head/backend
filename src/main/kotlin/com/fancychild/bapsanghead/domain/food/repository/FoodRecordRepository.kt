@@ -11,4 +11,5 @@ interface FoodRecordRepository : JpaRepository<FoodRecord, Long> {
     fun findByUserIdAndDateAndMealType(userId: Long, date: LocalDate, mealType: MealType): List<FoodRecord>
 
     fun findByUserIdAndDateBetween(userId: Long, startDate: LocalDate, endDate: LocalDate): List<FoodRecordMealTypeDto>
+    fun deleteAllByUserIdAndDateAndMealType(userId: Long, date: LocalDate, mealType: MealType)
 }

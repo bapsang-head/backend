@@ -48,4 +48,9 @@ class FoodRecordService(
     fun findFoodRecordsByUserIdAndDateAndMealType(userId: Long, date: LocalDate, mealType: MealType): List<FoodRecord> {
         return foodRecordRepository.findByUserIdAndDateAndMealType(userId, date, mealType)
     }
+
+    @Transactional
+    fun clearFoodRecords(userId: Long, date: LocalDate, mealType: MealType) {
+        foodRecordRepository.deleteAllByUserIdAndDateAndMealType(userId, date, mealType)
+    }
 }
