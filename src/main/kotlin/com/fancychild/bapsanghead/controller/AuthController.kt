@@ -8,10 +8,10 @@ import com.fancychild.bapsanghead.domain.user.enums.ActivityLevel
 import com.fancychild.bapsanghead.domain.user.enums.Gender
 import com.fancychild.bapsanghead.domain.user.enums.Platform
 import com.fancychild.bapsanghead.domain.user.service.UserService
-import com.fancychild.bapsanghead.dto.request.LoginRequest
-import com.fancychild.bapsanghead.dto.request.RegisterRequest
-import com.fancychild.bapsanghead.dto.response.AuthResponse
-import com.fancychild.bapsanghead.dto.response.AuthToken
+import com.fancychild.bapsanghead.controller.dto.request.LoginRequest
+import com.fancychild.bapsanghead.controller.dto.request.RegisterRequest
+import com.fancychild.bapsanghead.controller.dto.response.AuthResponse
+import com.fancychild.bapsanghead.controller.dto.response.AuthToken
 import com.fancychild.bapsanghead.jwt.JwtAuthTokenUtil
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter

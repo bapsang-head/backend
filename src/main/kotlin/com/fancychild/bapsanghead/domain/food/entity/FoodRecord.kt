@@ -23,6 +23,7 @@ class FoodRecord(
 
         val date: LocalDate,
 
+        @Enumerated(EnumType.STRING)
         val mealType: MealType
 ): BaseEntity()
 

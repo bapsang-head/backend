@@ -6,7 +6,7 @@ import com.fancychild.bapsanghead.domain.user.entity.UserDetails
 import com.fancychild.bapsanghead.domain.user.entity.Users
 import com.fancychild.bapsanghead.domain.user.repository.UserDetailsRepository
 import com.fancychild.bapsanghead.domain.user.repository.UserRepository
-import com.fancychild.bapsanghead.dto.response.AuthToken
+import com.fancychild.bapsanghead.controller.dto.response.AuthToken
 import com.fancychild.bapsanghead.exception.BaseException
 import com.fancychild.bapsanghead.exception.ErrorCode
 import com.fancychild.bapsanghead.util.AuthTokenGenerator

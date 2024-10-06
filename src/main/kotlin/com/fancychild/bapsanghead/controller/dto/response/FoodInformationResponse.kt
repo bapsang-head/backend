@@ -1,4 +1,4 @@
-package com.fancychild.bapsanghead.dto.response
+package com.fancychild.bapsanghead.controller.dto.response
 
 import com.fancychild.bapsanghead.client.FoodInformationResponse
 
@@ -14,7 +14,7 @@ data class FoodInformationResponse(
     companion object {
         fun from(
                 foodInformationResponse: FoodInformationResponse,
-        ): com.fancychild.bapsanghead.dto.response.FoodInformationResponse {
+        ): com.fancychild.bapsanghead.controller.dto.response.FoodInformationResponse {
             return FoodInformationResponse(
                     name = foodInformationResponse.food,
                     unit = foodInformationResponse.unit,

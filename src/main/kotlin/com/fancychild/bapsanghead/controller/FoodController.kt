@@ -5,11 +5,13 @@ import com.fancychild.bapsanghead.config.userid.LoginUserId
 import com.fancychild.bapsanghead.domain.food.entity.MealType
 import com.fancychild.bapsanghead.domain.food.service.FoodRecordService
 import com.fancychild.bapsanghead.domain.food.service.FoodService
-import com.fancychild.bapsanghead.dto.request.FoodInformationWithCountRequest
-import com.fancychild.bapsanghead.dto.response.FoodInformationResponse
-import com.fancychild.bapsanghead.dto.response.FoodRecordResponse
+import com.fancychild.bapsanghead.controller.dto.request.FoodInformationWithCountRequest
+import com.fancychild.bapsanghead.controller.dto.response.FoodInformationResponse
+import com.fancychild.bapsanghead.controller.dto.response.FoodRecordEnteringResponse
+import com.fancychild.bapsanghead.controller.dto.response.FoodRecordResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -17,6 +19,8 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
+import java.time.YearMonth
+import java.time.format.DateTimeFormatter
 
 @Tag(name = "음식 API", description = "음식 관련 API")
 @RestController
@@ -46,7 +50,7 @@ class FoodController(
 
             @PathVariable("mealType") mealType: MealType
     ): List<FoodRecordResponse> {
-        return foodRecordService.getFoodRecords(userId, date, mealType).map {
+        return foodRecordService.findFoodRecordsByUserIdAndDateAndMealType(userId, date, mealType).map {
             FoodRecordResponse.from(it)
         }
     }
@@ -87,5 +91,25 @@ class FoodController(
                     mealType = request.mealType
             )
         }
+    }
+
+    @Operation(summary = "월별 식단 입력 여부 조회 API", description = "월을 기준으로 식단 입력 여부를 조회합니다.")
+    @GetMapping("/records/year-month/{yearMonth}")
+    fun getFoodRecordByMonth(
+            @Parameter(hidden = true)
+            @LoginUserId userId: Long,
+
+            @Schema(example = "2024-09")
+            @PathVariable("yearMonth") yearMonth: String
+    ): List<FoodRecordEnteringResponse> {
+
+        val parseYearMonth = runCatching {
+            YearMonth.parse(yearMonth, DateTimeFormatter.ofPattern("yyyy-MM"))
+        }.getOrElse {
+            throw IllegalArgumentException("올바른 형식의 년월을 입력해주세요. | userId: $userId, yearMonth: $yearMonth")
+        }
+
+        val foodRecordsByYearMonth = foodRecordService.getFoodRecordsByYearMonth(userId, parseYearMonth)
+        return FoodRecordEnteringResponse.toList(parseYearMonth, foodRecordsByYearMonth)
     }
 }

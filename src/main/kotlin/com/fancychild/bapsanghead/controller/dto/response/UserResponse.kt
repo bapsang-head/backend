@@ -1,4 +1,4 @@
-package com.fancychild.bapsanghead.dto.response
+package com.fancychild.bapsanghead.controller.dto.response
 
 data class UserResponse(
         val name: String,

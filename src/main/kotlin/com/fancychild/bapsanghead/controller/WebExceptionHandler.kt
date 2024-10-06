@@ -1,7 +1,7 @@
 package com.fancychild.bapsanghead.controller
 
-import com.fancychild.bapsanghead.dto.response.ErrorResponse
-import com.fancychild.bapsanghead.dto.response.ErrorResponse.Companion.of
+import com.fancychild.bapsanghead.controller.dto.response.ErrorResponse
+import com.fancychild.bapsanghead.controller.dto.response.ErrorResponse.Companion.of
 import com.fancychild.bapsanghead.exception.BaseException
 import com.fancychild.bapsanghead.exception.ErrorCode
 import jakarta.servlet.http.HttpServletRequest
@@ -73,7 +73,7 @@ class WebExceptionHandler {
         log.warn("[InvalidParameterException]", exception)
         return ResponseEntity
                 .badRequest()
-                .body(of(ErrorCode.INVALID_INPUT_VALUE))
+                .body(of(ErrorCode.INVALID_INPUT_VALUE, exception))
     }
 
     private fun getStackTraceAsString(throwable: Throwable): String {

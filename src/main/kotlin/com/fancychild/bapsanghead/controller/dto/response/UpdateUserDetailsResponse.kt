@@ -1,4 +1,4 @@
-package com.fancychild.bapsanghead.dto.response
+package com.fancychild.bapsanghead.controller.dto.response
 
 import com.fancychild.bapsanghead.domain.user.dto.UserDetailsDto
 import com.fancychild.bapsanghead.domain.user.enums.ActivityLevel
@@ -16,7 +16,7 @@ data class UpdateUserDetailsResponse(
         val activityLevel: ActivityLevel?
 ){
     companion object{
-        fun of(dto: UserDetailsDto): UpdateUserDetailsResponse{
+        fun of(dto: UserDetailsDto): UpdateUserDetailsResponse {
             return UpdateUserDetailsResponse(
                     height = dto.height,
                     weight = dto.weight,

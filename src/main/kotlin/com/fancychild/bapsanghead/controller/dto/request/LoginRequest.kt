@@ -1,4 +1,4 @@
-package com.fancychild.bapsanghead.dto.request
+package com.fancychild.bapsanghead.controller.dto.request
 
 import io.swagger.v3.oas.annotations.media.Schema
 import org.jetbrains.annotations.NotNull
