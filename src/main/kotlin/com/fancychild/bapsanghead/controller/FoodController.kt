@@ -103,7 +103,7 @@ class FoodController(
                     name = it.food,
                     unit = it.unit,
                     count = it.quantity,
-                    date = LocalDate.now(),
+                    date = request.date,
                     mealType = request.mealType
             )
         }
