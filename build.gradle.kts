@@ -49,6 +49,10 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-api:0.12.3")
     implementation("io.jsonwebtoken:jjwt-impl:0.12.3")
     implementation("io.jsonwebtoken:jjwt-jackson:0.12.3")
+
+
+    implementation("org.springframework.boot:spring-boot-starter-aop") // aop 추가
+    implementation("org.redisson:redisson-spring-boot-starter:3.30.0")
 }
 dependencyManagement {
     imports {

@@ -9,6 +9,7 @@ import com.fancychild.bapsanghead.controller.dto.request.FoodInformationWithCoun
 import com.fancychild.bapsanghead.controller.dto.response.FoodInformationResponse
 import com.fancychild.bapsanghead.controller.dto.response.FoodRecordEnteringResponse
 import com.fancychild.bapsanghead.controller.dto.response.FoodRecordResponse
+import com.fancychild.bapsanghead.lock.DistributedLock
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.media.Schema
@@ -38,11 +39,13 @@ class FoodController(
 
     @Operation(summary = "식단 입력 API", description = "사용자가 입력한 식단 문장을 입력합니다.")
     @PostMapping("/input")
-    fun inputFood(@RequestBody request: ResultRequest): ResultResponse = aiClient.inputFood(request, key)
+    @DistributedLock(key = "#userId")
+    fun inputFood(@LoginUserId userId: Long, @RequestBody request: ResultRequest): ResultResponse = aiClient.inputFood(request, key)
 
     @Operation(summary = "식단 내역 초기화 API", description = "사용자가 입력한 식단을 수정하기 전에 초기화합니다.")
     @DeleteMapping("/records/date/{date}/type/{mealType}")
     @ResponseStatus(HttpStatus.OK)
+    @DistributedLock(key = "#userId")
     fun clearFoodRecords(
             @Parameter(hidden = true)
             @LoginUserId userId: Long,
@@ -92,6 +95,7 @@ class FoodController(
 
     @Operation(summary = "음식 정보 업로드 API", description = "음식 정보를 업로드합니다.")
     @PostMapping("/information")
+    @DistributedLock(key = "#userId")
     fun uploadFoodRecord(
             @Parameter(hidden = true)
             @LoginUserId userId: Long,
