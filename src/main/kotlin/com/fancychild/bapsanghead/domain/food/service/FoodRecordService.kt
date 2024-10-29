@@ -8,6 +8,7 @@ import com.fancychild.bapsanghead.domain.food.entity.FoodRecord
 import com.fancychild.bapsanghead.domain.food.entity.MealType
 import com.fancychild.bapsanghead.domain.food.repository.FoodRecordRepository
 import com.fancychild.bapsanghead.domain.user.service.UserService
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -25,11 +26,14 @@ class FoodRecordService(
         private val foodService: FoodService,
 ) {
 
+    private val log = LoggerFactory.getLogger(FoodRecordService::class.java)
+
     @Transactional
     fun uploadFoodRecord(userId: Long, name: String, unit: String, count: Int, date: LocalDate, mealType: MealType) {
         val user = userService.findById(userId)
         val food = foodService.findByNameAndUnit(name, unit)?: run {
             val informationOfFood = aiClient.getInformationOfFood(FoodInformationRequest(name, unit), key)
+            log.info("ai 호출됨 informationOfFood: $informationOfFood")
 
             foodService.createNewFood(
                     Food(

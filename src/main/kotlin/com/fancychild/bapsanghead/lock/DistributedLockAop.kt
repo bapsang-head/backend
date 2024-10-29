@@ -22,7 +22,7 @@ class DistributedLockAop(
     private val log = LoggerFactory.getLogger(DistributedLockAop::class.java)
 
     @Around("@annotation(com.fancychild.bapsanghead.lock.DistributedLock)")
-    fun lock(joinPoint: ProceedingJoinPoint): Any {
+    fun lock(joinPoint: ProceedingJoinPoint): Any? {
         val signature = joinPoint.signature as MethodSignature
         val method = signature.method
         val distributedLock = method.getAnnotation(DistributedLock::class.java)
@@ -34,6 +34,7 @@ class DistributedLockAop(
         val lock: RLock = redissonClient.getLock(key)
 
         try {
+            log.info("Redisson Lock TryLock {} {}", keyValue("serviceName", method.name), keyValue("key", key))
             val available: Boolean = lock.tryLock(
                 distributedLock.waitTime, distributedLock.leaseTime,
                 distributedLock.timeUnit
